@@ -30,7 +30,25 @@ export async function createUniversity(req, res) {
 
 export async function getUniversity(req, res) {}
 
-export async function getAllUniversities(req, res) {}
+export async function getAllUniversities(req, res) {
+  try {
+    const universities = University.find();
+
+    if (universities.length === 0) {
+      return res.status(404).json({
+        message: "Universities are not found!",
+      });
+    } else {
+      return res.status(200).json(universities);
+    }
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Failed to get all universities!",
+    });
+  }
+}
 
 export async function updateUniversity(req, res) {
   if (!isAdmin(req.user)) {
