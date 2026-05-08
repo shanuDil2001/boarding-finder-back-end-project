@@ -63,6 +63,7 @@ export async function loginUser(req, res) {
       } else {
         const token = jwt.sign(
           {
+            _id: user._id,
             fName: user.fName,
             lName: user.lName,
             email: user.email,
