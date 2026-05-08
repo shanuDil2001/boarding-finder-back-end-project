@@ -4,6 +4,7 @@ import connectDatabase from "./config/connectDatabase.js";
 import env from "./config/validateEnv.js";
 import authenticateUser from "./middleware/authenticateUser.js";
 import userRouter from "./routes/userRouter.js";
+import universityRouter from "./routes/universityRouter.js";
 
 // Connect database
 connectDatabase();
@@ -17,6 +18,7 @@ app.use(authenticateUser);
 
 // Define routes
 app.use("/api/users/", userRouter);
+app.use("/api/universities/", universityRouter);
 
 // Start server
 app.listen(env.PORT, () => {
