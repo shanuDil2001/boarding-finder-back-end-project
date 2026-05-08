@@ -28,7 +28,27 @@ export async function createUniversity(req, res) {
   }
 }
 
-export async function getUniversity(req, res) {}
+export async function getUniversity(req, res) {
+  try {
+    const universityName = req.params.name;
+
+    const university = await University.findOne({ name: universityName });
+
+    if (university === null) {
+      return res.status(404).json({
+        message: "University is not found!",
+      });
+    } else {
+      return res.status(200).json(university);
+    }
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Failed to get the university!",
+    });
+  }
+}
 
 export async function getAllUniversities(req, res) {
   try {
