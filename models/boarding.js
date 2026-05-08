@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const boardingSchema = mongoose.Schema(
   {
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,
@@ -55,6 +60,12 @@ const boardingSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "universities",
       required: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "approved"],
+      required: true,
+      default: "pending",
     },
   },
   { timestamps: true },
