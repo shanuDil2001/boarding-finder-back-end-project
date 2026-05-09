@@ -1,5 +1,6 @@
 import Boarding from "../models/boarding.js";
 import generateId from "../utils/generateId.js";
+import University from "../models/university.js";
 
 export async function createBoardingHouse(req, res) {
   if (req.user === undefined) {
@@ -22,6 +23,10 @@ export async function createBoardingHouse(req, res) {
         id = generateId("BORD", sortedBoardingHouses[0].id);
       }
 
+      const universityName = req.body.university;
+
+      const university = await University.findOne({ name: universityName });
+
       const boardingHouse = new Boarding({
         id: id,
         name: req.body.name,
@@ -34,7 +39,7 @@ export async function createBoardingHouse(req, res) {
           type: req.body.location.type,
           coordinates: req.body.location.coordinates,
         },
-        university: req.body.university,
+        university: university._id,
         status: req.body.status,
       });
 
