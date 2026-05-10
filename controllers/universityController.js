@@ -52,7 +52,7 @@ export async function getUniversity(req, res) {
 
 export async function getAllUniversities(req, res) {
   try {
-    const universities = University.find();
+    const universities = await University.find();
 
     if (universities.length === 0) {
       return res.status(404).json({

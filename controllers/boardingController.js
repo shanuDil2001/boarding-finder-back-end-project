@@ -62,7 +62,7 @@ export async function getBoardingHouse(req, res) {
   try {
     const boardingHouseId = req.params.id;
 
-    const boarding = Boarding.findOne({ id: boardingHouseId });
+    const boarding = await Boarding.findOne({ id: boardingHouseId });
 
     if (boarding === null) {
       return res.status(404).json({
